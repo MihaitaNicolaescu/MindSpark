@@ -1,0 +1,115 @@
+{
+    "quiz": [
+      {
+        "question": "Which company created the first commercially available mobile phone?",
+        "answers": [
+          "Motorola",
+          "Nokia",
+          "Apple",
+          "Samsung"
+        ],
+        "correct_answer": "Motorola",
+        "points": 3
+      },
+      {
+        "question": "What does the acronym 'AI' stand for in technology?",
+        "answers": [
+          "Artificial Intelligence",
+          "Automated Integration",
+          "Application Interface",
+          "Adaptive Internet"
+        ],
+        "correct_answer": "Artificial Intelligence",
+        "points": 1
+      },
+      {
+        "question": "What is the main purpose of blockchain technology?",
+        "answers": [
+          "Creating a decentralized payment system",
+          "Creating cryptocurrencies",
+          "Storing data securely and transparently",
+          "All of the above"
+        ],
+        "correct_answer": "All of the above",
+        "points": 3
+      },
+      {
+        "question": "What type of technology do most smartphones use to recognize fingerprints?",
+        "answers": [
+          "Optical sensors",
+          "Temperature sensors",
+          "Ultrasonic sensors",
+          "Capacitive sensors"
+        ],
+        "correct_answer": "Optical sensors",
+        "points": 2
+      },
+      {
+        "question": "What does the acronym 'HTTP' stand for in URLs?",
+        "answers": [
+          "Hyper Text Transfer Protocol",
+          "High Traffic Transfer Protocol",
+          "Hyperlink Text Transfer Protocol",
+          "Hyper Terminal Transfer Protocol"
+        ],
+        "correct_answer": "Hyper Text Transfer Protocol",
+        "points": 1
+      },
+      {
+        "question": "What is the primary purpose of an operating system?",
+        "answers": [
+          "Managing the hardware and software of the device",
+          "Creating applications for users",
+          "Ensuring an internet connection",
+          "Improving the processor's performance"
+        ],
+        "correct_answer": "Managing the hardware and software of the device",
+        "points": 2
+      },
+      {
+        "question": "What type of processor do most personal computers use?",
+        "answers": [
+          "ARM",
+          "Intel x86",
+          "AMD Ryzen",
+          "PowerPC"
+        ],
+        "correct_answer": "Intel x86",
+        "points": 1
+      },
+      {
+        "question": "What is a 'bug' in a computer program?",
+        "answers": [
+          "An error or defect in the source code",
+          "A type of computer virus",
+          "A type of utility software",
+          "A testing application"
+        ],
+        "correct_answer": "An error or defect in the source code",
+        "points": 2
+      },
+      {
+        "question": "What is the main difference between 4G and 5G?",
+        "answers": [
+          "5G offers much higher internet speeds than 4G",
+          "4G has a larger coverage area than 5G",
+          "5G cannot be used on mobile devices",
+          "4G consumes less energy than 5G"
+        ],
+        "correct_answer": "5G offers much higher internet speeds than 4G",
+        "points": 3
+      },
+      {
+        "question": "What is a 'smart contract' in the context of blockchain?",
+        "answers": [
+          "A self-executing digital contract that automatically activates when predefined conditions are met",
+          "A signed agreement between two parties via a blockchain platform",
+          "A legal document stored on a blockchain for security",
+          "A type of cryptocurrency"
+        ],
+        "correct_answer": "A self-executing digital contract that automatically activates when predefined conditions are met",
+        "points": 3
+      }
+    ]
+  }
+  
