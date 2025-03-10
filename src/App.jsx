@@ -1,17 +1,32 @@
+import { useState } from 'react'
 import './App.css'
+import StartQuiz from './components/StartQuiz'
+import Question from './components/Question'
 
 function App() {
 
-  return (
-    <>
-      <div className='flex flex-row min-h-screen justify-center items-center bg-[#5C7285]'>
-        <div className='grid grid-flow-row'>
-          <p className='text-[50px] text-[#E2E0C8] font-thin font-serif'>MindSpark</p>
-          <button className='rounded bg-[#A7B49E] w-full h-10 font-bold'>Start Quiz</button>
+  const [quizStart, setQuizStart] = useState(false)
+
+  
+
+  if(quizStart === false){
+    return (
+      <>
+        <div className='flex flex-row min-h-screen justify-center items-center bg-[#5C7285]'>
+          <StartQuiz setQuizStart={setQuizStart}/>
         </div>
-      </div>
-    </>
-  )
+      </>
+    )
+  } else {
+    return (
+      <>
+        <div className='flex flex-row min-h-screen justify-center items-center bg-[#5C7285]'>
+          <Question />
+        </div>
+      </>
+    )
+  }
+
 }
 
 export default App
