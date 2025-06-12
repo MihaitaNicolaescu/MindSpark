@@ -1,7 +1,7 @@
 import { useEffect, useReducer, useRef } from "react";
 
 const initialState = {
-    remainingTime: 60,
+    remainingTime: 999,
 }
 
 function Timer({started, stopQuiz}) {

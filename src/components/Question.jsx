@@ -1,106 +1,46 @@
-import axios from "axios";
-import { useEffect, useReducer } from "react";
 import Answer from "./Question/Answer";
 import Timer from "./Timer";
-import Finished from "./Results/Finished";
-import TimeIsUp from "./Results/TimeIsUp";
+import Progress from "./Progress";
 
-const initialState = {
-  data: [],
-  contor: 0,
-  answer: null,
-  started: false,
-  endReason: "notStarted",
-  points: 0,
-};
-
-function Question({quizStart, setQuizStart}){
-    const [state, dispatch] = useReducer(reducer, initialState);
-
-      useEffect(function () {
-          axios.get("http://localhost:8789/quiz").then((response) => {
-            dispatch({type: "setData", payload: response.data});
-            dispatch({type: "setStarted", payload: true});
-            console.log(response.data);
-          })
-      }, []);
-
-      useEffect(() => {
-        if (state.contor >= state.data.length) {
-          dispatch({type: "setEndReason", payload: "finished"});
-          dispatch({type: "setStarted", payload: false});
-        }
-      }, [state.contor])
-    
-
+function Question({setStatus, appDispatch, appState, maxPoints}){
       function nextQuestion(){
-        if(state.data[state.contor].answers[state.answer] === state.data[state.contor].correct_answer){
-          dispatch({type: "increasePoints", payload: state.data[state.contor].points});
+        if(appState.data[appState.contor].answers[appState.answer] === appState.data[appState.contor].correct_answer){
+          appDispatch({type: "increasePoints", payload: appState.data[appState.contor].points});
         }
-        dispatch({type: "setContor", payload: state.contor + 1});
-        dispatch({type: "setAnswer", payload: null});
+        appDispatch({type: "setContor", payload: appState.contor + 1});
+        appDispatch({type: "setAnswer", payload: null});
       }
 
       function stopQuiz(endReason){
-        dispatch({type: "setStarted", payload: false});
-        dispatch({type: "setEndReason", payload: endReason});
-        setQuizStart(false);
+        appDispatch({type: "setStarted", payload: false});
+        appDispatch({type: "setEndReason", payload: endReason});
+        setStatus("timesUp"); //need to handle this implementation
       }
 
-      function showResult(){
-        switch(state.endReason){
-          case "finished":
-            return <Finished/>;
-          case "timeIsUp":
-            return <TimeIsUp/>;
-        }
-      }
-
-      if(state.data.length > 0 && state.contor < state.data.length){
+      if(appState.data.length > 0 && appState.contor < appState.data.length){
         return(
-        <div className="grid place-items-center">
-          <h2>POINTS {state.points}</h2>
-            <div className="grid place-items-center">
-                <p className="text-3xl font-bold mb-10">{state.data[state.contor].question}</p>
-                <Answer option={state.data[state.contor].answers[0]} isChecked={state.answer === 0} onClick={() => dispatch({type: "setAnswer", payload: 0})} />
-                <Answer option={state.data[state.contor].answers[1]} isChecked={state.answer === 1} onClick={() => dispatch({type: "setAnswer", payload: 1})} />
-                <Answer option={state.data[state.contor].answers[2]} isChecked={state.answer === 2} onClick={() => dispatch({type: "setAnswer", payload: 2})} />
-                <Answer option={state.data[state.contor].answers[3]} isChecked={state.answer === 3} onClick={() => dispatch({type: "setAnswer", payload: 3})} />
-            </div>
-            <div className="flex justify-center items-center gap-4 mt-10">
-            <p className="bg-[#A7B49E] w-20 font-xl text-center font-bold p-2 rounded-xl m-2"><Timer started={state.started} stopQuiz={stopQuiz}/></p>
-            {state.answer !== null && (
-                <button
-                    className="bg-[#A7B49E] w-20 font-xl text-center font-bold hover:cursor-pointer hover:bg-[#818C78] p-2 rounded-xl"
-                    onClick={() => nextQuestion()}>
-                    Next
-                </button>
-            )}
-            </div>
+        <div className="grid place-items-center w-full">
+          <Progress points={appState.points} maxPoints={maxPoints} totalQuestions={appState.data.length} contor={appState.contor}/>
+          <div className="grid place-items-center">
+              <p className="text-xl font-medium mb-5 mt-5 w-2/3 text-center">{appState.data[appState.contor].question}</p>
+              <Answer option={appState.data[appState.contor].answers[0]} isChecked={appState.answer === 0} onClick={() => appDispatch({type: "setAnswer", payload: 0})} />
+              <Answer option={appState.data[appState.contor].answers[1]} isChecked={appState.answer === 1} onClick={() => appDispatch({type: "setAnswer", payload: 1})} />
+              <Answer option={appState.data[appState.contor].answers[2]} isChecked={appState.answer === 2} onClick={() => appDispatch({type: "setAnswer", payload: 2})} />
+              <Answer option={appState.data[appState.contor].answers[3]} isChecked={appState.answer === 3} onClick={() => appDispatch({type: "setAnswer", payload: 3})} />
+          </div>
+          <div className="flex justify-center items-center gap-4 mt-10">
+          <p className="bg-[#A7B49E] w-20 font-xl text-center font-bold p-2 rounded-xl m-2"><Timer started={appState.started} stopQuiz={stopQuiz}/></p>
+          {appState.answer !== null && (
+              <button
+                  className="bg-[#A7B49E] w-20 font-xl text-center font-bold hover:cursor-pointer hover:bg-[#818C78] p-2 rounded-xl"
+                  onClick={() => nextQuestion()}>
+                  Next
+              </button>
+          )}
+          </div>
         </div>
         )
-      } else if(state.contor >= state.data.length){
-        return showResult();
       }
-}
-
-function reducer(state, action) {
-  switch(action.type){
-    case "setData":
-      return {...state, data: action.payload};
-    case "setContor":
-      return {...state, contor: action.payload};
-    case "setAnswer":
-      return {...state, answer: action.payload};
-    case "setStarted":
-      return {...state, started: action.payload};
-    case "setEndReason":
-      return {...state, endReason: action.payload};
-    case "increasePoints":
-      return {...state, points: state.points + action.payload }
-    default:
-      throw new Error ("Unknow action!");
-  }
 }
 
 export default Question;
