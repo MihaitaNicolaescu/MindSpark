@@ -16,7 +16,7 @@ function Question({setStatus, appDispatch, appState, maxPoints}){
         appDispatch({type: "setEndReason", payload: endReason});
         setStatus("timesUp"); //need to handle this implementation
       }
-
+      
       if(appState.data.length > 0 && appState.contor < appState.data.length){
         return(
         <div className="grid place-items-center w-full">
@@ -29,14 +29,14 @@ function Question({setStatus, appDispatch, appState, maxPoints}){
               <Answer option={appState.data[appState.contor].answers[3]} isChecked={appState.answer === 3} onClick={() => appDispatch({type: "setAnswer", payload: 3})} />
           </div>
           <div className="flex justify-center items-center gap-4 mt-10">
-          <p className="bg-[#A7B49E] w-20 font-xl text-center font-bold p-2 rounded-xl m-2"><Timer started={appState.started} stopQuiz={stopQuiz}/></p>
-          {appState.answer !== null && (
-              <button
-                  className="bg-[#A7B49E] w-20 font-xl text-center font-bold hover:cursor-pointer hover:bg-[#818C78] p-2 rounded-xl"
-                  onClick={() => nextQuestion()}>
-                  Next
-              </button>
-          )}
+            <p className="bg-[#A7B49E] w-20 font-xl text-center font-bold p-2 rounded-xl m-2"><Timer started={appState.started} stopQuiz={stopQuiz}/></p>
+            {appState.answer !== null && (
+                <button
+                    className="bg-[#A7B49E] w-20 font-xl text-center font-bold hover:cursor-pointer hover:bg-[#818C78] p-2 rounded-xl"
+                    onClick={() => nextQuestion()}>
+                    Next
+                </button>
+            )}
           </div>
         </div>
         )

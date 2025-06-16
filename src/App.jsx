@@ -24,12 +24,11 @@ function App() {
     axios.get("http://localhost:8789/quiz").then((response) => {
       dispatch({type: "setData", payload: response.data});
       dispatch({type: "setStarted", payload: true});
-      console.log(response.data);
-    })
-  }, []);
+    });
+  }, [state]);
 
   useEffect(() => {
-    if (state.contor >= state.data.length) {
+    if (state.data.length > 0 && state.contor >= state.data.length) {
       dispatch({type: "setEndReason", payload: "finished"});
       dispatch({type: "setStarted", payload: false});
       setStatus("finished");
@@ -39,12 +38,11 @@ function App() {
   function getMaxPoints() {
     return state.data.reduce((max, currentElm) => max + currentElm.points, 0);
   }
-  
   if(status === "notStarted"){
     return (
       <>
         <div className='flex flex-row min-h-screen justify-center items-center bg-[#5C7285]'>
-          <StartQuiz setStatus={setStatus}/>
+          <StartQuiz setStatus={setStatus} appDispatch={dispatch}/>
         </div>
       </>
     )
@@ -60,7 +58,7 @@ function App() {
     return (
       <>
         <div className='flex flex-row min-h-screen justify-center items-center bg-[#5C7285]'>
-          <Finished setStatus={setStatus} points={state.points} maxPoints={getMaxPoints()}/>
+          <Finished setStatus={setStatus} points={state.points} maxPoints={getMaxPoints()} appDispatch={dispatch}/>
         </div>
       </>
     )
@@ -68,7 +66,7 @@ function App() {
     return (
       <>
         <div className='flex flex-row min-h-screen justify-center items-center bg-[#5C7285]'>
-          <TimeIsUp setStatus={setStatus}/>
+          <TimeIsUp setStatus={setStatus} appDispatch={dispatch}/>
         </div>
       </>
     )
@@ -90,6 +88,8 @@ function reducer(state, action) {
       return {...state, endReason: action.payload};
     case "increasePoints":
       return {...state, points: state.points + action.payload }
+    case "reset":
+      return initialState;
     default:
       throw new Error ("Unknow action!");
   }

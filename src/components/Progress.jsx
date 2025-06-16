@@ -6,7 +6,7 @@ function Progress({points, maxPoints, totalQuestions, contor}) {
                     <progress className="w-full" max={totalQuestions} value={contor} />
                 </div>
                 <div className="col-span-1">
-                    <p className="font-mono font-bold">Question {contor} / {totalQuestions}</p>
+                    <p className="font-mono font-bold">Question {contor + 1} / {totalQuestions}</p>
                 </div>
                 <div className="col-span-1 flex justify-end">
                     <p className="font-mono font-bold">{points} / {maxPoints} Points</p>

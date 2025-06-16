@@ -1,13 +1,15 @@
 import { useEffect, useReducer, useRef } from "react";
 
 const initialState = {
-    remainingTime: 999,
+    remainingTime: 300,
 }
 
 function Timer({started, stopQuiz}) {
 
     const [state, dispatch] = useReducer(reducer, initialState);
     const intervalRef = useRef(null);
+    const mins = Math.floor(state.remainingTime / 60);
+    const sec = state.remainingTime % 60;
 
     useEffect(() => {
         if(started === true && intervalRef.current === null){
@@ -28,7 +30,7 @@ function Timer({started, stopQuiz}) {
 
 
     return <>
-        {state.remainingTime} sec
+        {mins < 10 && "0"}{mins} : {sec < 10 && "0"}{sec}
     </>
 }
 
