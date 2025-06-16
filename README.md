@@ -1,8 +1,20 @@
-# React + Vite
+# MindSpark
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+MindSpark is a React application designed to quiz questions.  
+It uses `json-server` to serve questions from `data/questions.json`.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Built with React and `useReducer`
+- User-friendly quiz UI
+- `json-server` backend for questions
+
+## 🛠 Installation
+
+```bash
+git clone https://github.com/MihaitaNicolaescu/MindSpark.git
+cd MindSpark
+npm install
+
+npm run server
+npm run dev
